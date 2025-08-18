@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center">
-                <img src="../Image/berca.svg" alt="PT Berca Hardayaperkasa" class="h-10 w-auto">
+                <img src="Image/berca.svg" alt="PT Berca Hardayaperkasa" class="h-10 w-auto">
                 <span class="text-lg font-semibold text-black">PT Berca Hardayaperkasa</span>
             </div>
             <div class="hidden md:flex space-x-8">
@@ -29,3 +29,11 @@
         <a href="#contact" class="block px-3 py-2">Contact</a>
     </div>
 </nav>
+
+<script>
+  (function () {
+    // Jika di GitHub Pages project, prepend '/CSIPortofolio', kalau lokal biarkan kosong
+    var hasProject = window.location.pathname.indexOf('/CSIPortofolio/') === 0;
+    document.write('<base href="' + (hasProject ? '/CSIPortofolio/' : '/') + '">');
+  })();
+</script>
