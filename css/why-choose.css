@@ -1,0 +1,17 @@
+/* Why Choose Cards */
+.why-choose-card svg {
+  transition: transform 0.3s ease;
+}
+
+.why-choose-card:hover svg {
+  transform: scale(1.1);
+}
+
+/* Backgrounds */
+.bg-gray-900 {
+  background-color: #111827;
+}
+
+.text-gray-300 {
+  color: #d1d5db;
+}

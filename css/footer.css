@@ -1,0 +1,19 @@
+/* Footer Links */
+footer a {
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+/* Logo in Footer */
+footer img {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+/* Border Top */
+footer .border-t {
+  border-color: #374151;
+}

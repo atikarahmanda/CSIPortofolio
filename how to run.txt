@@ -1,0 +1,2 @@
+cd E:\Presales\CSI Portofolio
+python -m http.server 8000

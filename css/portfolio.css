@@ -1,0 +1,23 @@
+/* Portfolio Cards */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-to-br {
+  transition: background 0.3s ease;
+}
+
+/* Tags */
+.flex-wrap span {
+  transition: background-color 0.3s ease;
+}
+
+.flex-wrap span:hover {
+  background-color: #e5e7eb;
+}

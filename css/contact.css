@@ -1,0 +1,23 @@
+/* Contact Section Styling */
+.contact-info svg {
+  transition: transform 0.3s ease;
+}
+
+.contact-info:hover svg {
+  transform: scale(1.1);
+}
+
+/* Social Icons */
+.social-icon {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Demo Form Placeholder */
+.demo-form-placeholder {
+  background: #f9fafb;
+  border: 2px dashed #d1d5db;
+}

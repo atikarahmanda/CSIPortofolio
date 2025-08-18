@@ -1,0 +1,10 @@
+/* Hover animation */
+img.grayscale {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+img.grayscale:hover {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
