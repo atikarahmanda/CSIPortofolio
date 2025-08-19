@@ -1,50 +1,153 @@
-// Load HTML includes
-document.querySelectorAll("[data-include]").forEach(el => {
-    fetch(el.getAttribute("data-include"))
-        .then(res => res.text())
-        .then(html => el.innerHTML = html);
-});
+// File: main.js (Versi Final Dinamis)
 
-// Smooth scroll
+// Fungsi untuk memuat HTML includes
+function loadHtmlIncludes() {
+    const includeElements = document.querySelectorAll("[data-include]");
+    const promises = [...includeElements].map(el => {
+        return fetch(el.getAttribute("data-include"))
+            .then(res => {
+                if (!res.ok) throw new Error(`Gagal memuat: ${res.url} (${res.status})`);
+                return res.text();
+            })
+            .then(html => el.innerHTML = html);
+    });
+    return Promise.all(promises);
+}
+
+// Fungsi utama untuk inisialisasi filter
+function initializePortfolioFilter() {
+    const grid = document.getElementById('case-studies-grid');
+    const clearButton = document.getElementById('clear-filters-btn');
+
+    if (!grid || !clearButton) {
+        console.error("❌ Error: Elemen #case-studies-grid atau #clear-filters-btn tidak ditemukan.");
+        return;
+    }
+
+    // --- BAGIAN BARU: MEMBACA SEMUA TAG DARI CARD ---
+    const collectedTags = {
+        Category: new Set(),
+        Product: new Set(),
+        Company: new Set()
+    };
+
+    const allCards = grid.querySelectorAll('.card-hover');
+    allCards.forEach(card => {
+        card.querySelectorAll('[data-group]').forEach(tagElement => {
+            const group = tagElement.dataset.group;
+            const tagName = tagElement.textContent.trim();
+            if (collectedTags[group] && tagName) {
+                collectedTags[group].add(tagName);
+            }
+        });
+    });
+
+    // --- BAGIAN BARU: MEMBUAT CHECKBOX SECARA DINAMIS ---
+    for (const [groupName, tags] of Object.entries(collectedTags)) {
+        const ul = document.querySelector(`ul[data-filter-group="${groupName}"]`);
+        if (ul) {
+            ul.innerHTML = ''; // Kosongkan list yang ada
+
+            // Buat dan tambahkan checkbox "All"
+            ul.appendChild(createCheckboxItem('All'));
+
+            // Urutkan tag dan buat checkbox untuk masing-masing
+            [...tags].sort().forEach(tag => {
+                ul.appendChild(createCheckboxItem(tag));
+            });
+        }
+    }
+    
+    // Fungsi untuk membuat satu item checkbox
+    function createCheckboxItem(value) {
+        const li = document.createElement('li');
+        const label = document.createElement('label');
+        label.className = 'flex items-center space-x-2 cursor-pointer text-gray-700 hover:text-blue-600';
+        
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.className = 'tag-filter';
+        input.value = value;
+
+        const span = document.createElement('span');
+        span.textContent = value;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        li.appendChild(label);
+        return li;
+    }
+
+    // --- Logika Filter (Sama seperti sebelumnya, tapi kini bekerja dengan checkbox dinamis) ---
+    const checkboxes = document.querySelectorAll('.tag-filter');
+    const groups = {};
+    checkboxes.forEach(cb => {
+        const groupName = cb.closest('ul').dataset.filterGroup;
+        if (!groups[groupName]) groups[groupName] = [];
+        groups[groupName].push(cb);
+    });
+
+    Object.values(groups).forEach(groupCbs => {
+        const allCb = groupCbs.find(cb => cb.value === 'All');
+        if (!allCb) return;
+
+        allCb.addEventListener('change', () => {
+            if (allCb.checked) {
+                groupCbs.forEach(cb => { if (cb !== allCb) cb.checked = false; });
+            }
+            applyFilters();
+        });
+
+        groupCbs.forEach(cb => {
+            if (cb !== allCb) {
+                cb.addEventListener('change', () => {
+                    if (cb.checked) allCb.checked = false;
+                    const anyChecked = groupCbs.some(c => c !== allCb && c.checked);
+                    if (!anyChecked) allCb.checked = true;
+                    applyFilters();
+                });
+            }
+        });
+    });
+    
+    clearButton.addEventListener('click', () => {
+        checkboxes.forEach(cb => { cb.checked = cb.value === 'All'; });
+        applyFilters();
+    });
+
+    function applyFilters() {
+        const activeFilters = {};
+        Object.entries(groups).forEach(([groupKey, cbs]) => {
+            activeFilters[groupKey] = cbs
+                .filter(cb => cb.checked && cb.value !== 'All')
+                .map(cb => cb.value.toLowerCase());
+        });
+
+        [...grid.children].forEach(card => {
+            const cardTags = [...card.querySelectorAll('[data-group]')].map(span => span.textContent.trim().toLowerCase());
+            const isVisible = Object.entries(activeFilters).every(([groupKey, filters]) => {
+                if (filters.length === 0) return true;
+                return filters.some(filter => cardTags.includes(filter));
+            });
+            card.style.display = isVisible ? '' : 'none';
+        });
+    }
+
+    clearButton.click(); // Set kondisi awal ke "All"
+}
+
+// Fungsi smooth scroll Anda
 window.scrollToSection = function(id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 };
 
-// AJAX form submission
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contact-form');
-  const messageDiv = document.getElementById('form-message');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-        },
-        body: formData,
-      });
-
-      if (response.ok) {
-        messageDiv.textContent = '✅ Your message has been sent successfully!';
-        messageDiv.className = 'block text-green-700 bg-green-100 border border-green-300 rounded-md p-3';
-        form.reset();
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      messageDiv.textContent = '❌ Something went wrong. Please try again.';
-      messageDiv.className = 'block text-red-700 bg-red-100 border border-red-300 rounded-md p-3';
-    }
-
-    messageDiv.classList.remove('hidden');
-    setTimeout(() => {
-      messageDiv.classList.add('hidden');
-    }, 5000);
-  });
+// Menjalankan semuanya
+document.addEventListener("DOMContentLoaded", () => {
+    loadHtmlIncludes()
+        .then(() => {
+            initializePortfolioFilter();
+        })
+        .catch(error => {
+            console.error("Terjadi kesalahan:", error);
+        });
 });
