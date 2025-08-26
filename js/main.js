@@ -151,3 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Terjadi kesalahan:", error);
         });
 });
+
+(function () {
+    // Jika di GitHub Pages project, prepend '/CSIPortofolio', kalau lokal biarkan kosong
+    var hasProject = window.location.pathname.indexOf('/CSIPortofolio/') === 0;
+    document.write('<base href="' + (hasProject ? '/CSIPortofolio/' : '/') + '">');
+})();
