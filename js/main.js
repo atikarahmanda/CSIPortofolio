@@ -57,13 +57,13 @@ function initializePortfolioFilter() {
             });
         }
     }
-    
+
     // Fungsi untuk membuat satu item checkbox
     function createCheckboxItem(value) {
         const li = document.createElement('li');
         const label = document.createElement('label');
         label.className = 'flex items-center space-x-2 cursor-pointer text-gray-700 hover:text-blue-600';
-        
+
         const input = document.createElement('input');
         input.type = 'checkbox';
         input.className = 'tag-filter';
@@ -109,7 +109,7 @@ function initializePortfolioFilter() {
             }
         });
     });
-    
+
     clearButton.addEventListener('click', () => {
         checkboxes.forEach(cb => { cb.checked = cb.value === 'All'; });
         applyFilters();
@@ -137,7 +137,7 @@ function initializePortfolioFilter() {
 }
 
 // Fungsi smooth scroll Anda
-window.scrollToSection = function(id) {
+window.scrollToSection = function (id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 };
 
@@ -157,3 +157,51 @@ document.addEventListener("DOMContentLoaded", () => {
     var hasProject = window.location.pathname.indexOf('/CSIPortofolio/') === 0;
     document.write('<base href="' + (hasProject ? '/CSIPortofolio/' : '/') + '">');
 })();
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("✅ DOM loaded");
+  console.log("Form in DOM:", document.getElementById("contact-form"));
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const observer = new MutationObserver(() => {
+    const form = document.getElementById("contact-form");
+    if (form) {
+      initContactForm(); // panggil fungsi pasang listener
+      observer.disconnect(); // stop observer setelah ketemu
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+
+function initContactForm() {
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // kirim form ke Google Form / Apps Script
+    form.submit();
+
+    // reset input setelah 0.5 detik
+    setTimeout(() => {
+      form.reset();
+    }, 500);
+
+    // popup sweetalert
+    Swal.fire({
+      icon: "success",
+      title: "Message Sent!",
+      text: "Your message has been submitted successfully.",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3b82f6" // biru biar serasi
+    });
+  });
+}
+
+
+
+
