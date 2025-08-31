@@ -14,7 +14,6 @@ function loadHtmlIncludes() {
     return Promise.all(promises);
 }
 
-// Fungsi utama untuk inisialisasi filter
 function initializePortfolioFilter() {
     const grid = document.getElementById('case-studies-grid');
     const clearButton = document.getElementById('clear-filters-btn');
@@ -24,7 +23,6 @@ function initializePortfolioFilter() {
         return;
     }
 
-    // --- BAGIAN BARU: MEMBACA SEMUA TAG DARI CARD ---
     const collectedTags = {
         Category: new Set(),
         Product: new Set(),
@@ -42,7 +40,6 @@ function initializePortfolioFilter() {
         });
     });
 
-    // --- BAGIAN BARU: MEMBUAT CHECKBOX SECARA DINAMIS ---
     for (const [groupName, tags] of Object.entries(collectedTags)) {
         const ul = document.querySelector(`ul[data-filter-group="${groupName}"]`);
         if (ul) {
@@ -78,7 +75,6 @@ function initializePortfolioFilter() {
         return li;
     }
 
-    // --- Logika Filter (Sama seperti sebelumnya, tapi kini bekerja dengan checkbox dinamis) ---
     const checkboxes = document.querySelectorAll('.tag-filter');
     const groups = {};
     checkboxes.forEach(cb => {
@@ -136,7 +132,6 @@ function initializePortfolioFilter() {
     clearButton.click(); // Set kondisi awal ke "All"
 }
 
-// Fungsi smooth scroll Anda
 window.scrollToSection = function (id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 };
@@ -153,7 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 (function () {
-    // Jika di GitHub Pages project, prepend '/CSIPortofolio', kalau lokal biarkan kosong
     var hasProject = window.location.pathname.indexOf('/CSIPortofolio/') === 0;
     document.write('<base href="' + (hasProject ? '/CSIPortofolio/' : '/') + '">');
 })();
@@ -186,7 +180,6 @@ function initContactForm() {
     // kirim form ke Google Form / Apps Script
     form.submit();
 
-    // reset input setelah 0.5 detik
     setTimeout(() => {
       form.reset();
     }, 500);
@@ -197,7 +190,7 @@ function initContactForm() {
       title: "Message Sent!",
       text: "Your message has been submitted successfully.",
       confirmButtonText: "OK",
-      confirmButtonColor: "#3b82f6" // biru biar serasi
+      confirmButtonColor: "#3b82f6"
     });
   });
 }
