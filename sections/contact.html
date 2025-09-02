@@ -2,95 +2,58 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-5xl font-bold text-gray-900 mb-6">Get In Touch</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
         Ready to transform your business? Let's discuss how CSI can help you achieve your digital transformation goals.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-12">
-      <!-- Contact Info -->
-      <div>
-        <h3 class="text-2xl font-semibold text-gray-900 mb-8">Contact Information</h3>
-        <div class="space-y-6">
-          <div class="flex items-center">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div>
-              <p class="font-semibold text-gray-900">Email</p>
-              <p class="text-gray-600">aditya.danakusumah@berca.co.id</p>
-            </div>
-          </div>
+    <!-- Wrapper tengah -->
+    <div class="flex justify-center">
+      <div class="w-full max-w-lg">
+        <div class="bg-white shadow-xl rounded-2xl p-8">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-8 text-center">Send us a Message</h3>
+          
+          <form id="contact-form"
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeOhyA7KW4Jj6_G3zr7KMND7rMcm9mBjBuyYv3-khvs1Lk_tw/formResponse"
+            method="POST"
+            target="hidden_iframe"
+            class="space-y-6">
 
-          <div class="flex items-center">
-            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
             <div>
-              <p class="font-semibold text-gray-900">Office</p>
-              <p class="text-gray-600">Jakarta, Indonesia</p>
+              <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+              <input type="text" name="entry.1537129591" id="name" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm
+                       focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             </div>
-          </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+              <input type="email" name="entry.847446450" id="email" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm
+                       focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+              <textarea name="entry.1064339506" id="message" rows="4" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm
+                       focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg
+                     transition duration-300">
+              Send Message
+            </button>
+
+            <!-- Notifikasi -->
+            <div id="form-message" class="hidden text-sm font-medium rounded-md p-3 mt-4"></div>
+          </form>
         </div>
       </div>
-
-      <!-- Email Form -->
-      <div>
-        <h3 class="text-2xl font-semibold text-gray-900 mb-8">Send us a Message</h3>
-        <form id="contact-form"
-          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeOhyA7KW4Jj6_G3zr7KMND7rMcm9mBjBuyYv3-khvs1Lk_tw/formResponse"
-          method="POST"
-          target="hidden_iframe"
-          class="bg-gray-50 p-8 rounded-xl space-y-6">
-
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-            <input type="text" name="entry.1537129591" id="name" required
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
-                     focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-          </div>
-
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-            <input type="email" name="entry.847446450" id="email" required
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
-                     focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-          </div>
-
-          <div>
-            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-            <textarea name="entry.1064339506" id="message" rows="4" required
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
-                     focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-          </div>
-
-          <button type="submit"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg
-                   transition duration-300">
-            Send Message
-          </button>
-
-          <!-- Notifikasi -->
-          <div id="form-message" class="hidden text-sm font-medium rounded-md p-3 mt-4"></div>
-        </form>
-
-        <!-- iframe tersembunyi -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-      </div>
     </div>
+
+    <!-- iframe tersembunyi -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
   </div>
 </section>
-
-
-
-
-
-
